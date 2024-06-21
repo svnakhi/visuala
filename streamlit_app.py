@@ -42,7 +42,12 @@ sub_categories = st.multiselect("Select Sub-Category", filtered_df["Sub_Category
 # Filter the dataframe based on the selected sub-categories
 filtered_df = filtered_df[filtered_df["Sub_Category"].isin(sub_categories)]
 
-
+# (3) Show a line chart of sales for the selected items in (2)
+if not filtered_df.empty:
+    sales_by_month_filtered = filtered_df.filter(items=['Sales']).groupby(pd.Grouper(freq='M')).sum()
+    st.line_chart(sales_by_month_filtered, y="Sales")
+else:
+    st.write("No data available for the selected sub-categories.")
 
 
 

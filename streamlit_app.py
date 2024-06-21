@@ -50,6 +50,15 @@ else:
     st.write("No data available for the selected sub-categories.")
 
 
+# (4) Show three metrics for the selected items in (2): total sales, total profit, and overall profit margin (%)
+if not filtered_df.empty:
+    total_sales = filtered_df["Sales"].sum()
+    total_profit = filtered_df["Profit"].sum()
+    overall_profit_margin = (total_profit / total_sales) * 100 if total_sales != 0 else 0
+
+    st.metric("Total Sales", f"${total_sales:,.2f}")
+    st.metric("Total Profit", f"${total_profit:,.2f}")
+    st.metric("Overall Profit Margin", f"{overall_profit_margin:.2f}%")
 
 
 
